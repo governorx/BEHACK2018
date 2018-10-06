@@ -22,9 +22,12 @@ app.get('/', function (req, res, next) {
 app.get('/testing', function (req, res, next) {
     res.sendFile(__dirname + "/views/ARScale.html")
 });
+app.get('/home', function (req, res, next) {
+      res.sendFile(__dirname + "/Webpage/webpage.html")
+});
 
 //Asset response
-app.get("aa-logo.png", function(req,res,next){
+app.get("/aa-logo.png", function(req,res,next){
     res.sendFile(__dirname + "/Webpage/aa-logo.png")
 });
 app.get("/3DAssets/bigbox.gltf", function(req, res, next){
