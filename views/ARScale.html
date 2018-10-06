@@ -4,10 +4,14 @@
 <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 <body style='margin : 0px; overflow: hidden;'>
   <a-scene embedded arjs>
-	<!-- create your content here. just a box for now -->
-	<a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
-	<a-gltf-model src="../3DAssets/bigbox.gltf"></a-gltf-model>	
-	<a-box position='0 0.9 0' material='opacity: 0.5;'></a-box>
+	<!-- Boxes at the corners of max-->
+  <a-box position='5 0.5 2' material='opacity: 0.5;'></a-box>
+  <a-box position='-5 0.5 2' material='opacity: 0.5;'></a-box>
+  <a-box position='5 0.5 -2' material='opacity: 0.5;'></a-box>
+  <a-box position='-5 0.5 -2' material='opacity: 0.5;'></a-box>
+  <!--
+      <a-gltf-model position = '0 0 0' src="../3DAssets/bigbox.gltf"></a-gltf-model>	
+  -->
 
 	
     <!-- define a camera which will move according to the marker position -->

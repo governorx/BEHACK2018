@@ -1,7 +1,14 @@
 //Following lines are imports, we'll ad more as we need them.
 var express = require('express')
 var path = require ('path')
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('sslcert/private.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/mydomain.csr', 'utf8');
 
+var credentials = {key: privateKey, cert: certificate};
+var express = require('express');
 //Below we define our application, express is the format of our HTML, it just makes things prettier
 var app = express()
 var bodyParser = require('body-parser');
