@@ -19,15 +19,21 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', function (req, res, next) {
     res.sendFile(__dirname + "/views/index.html")
   });
+app.get('/testing', function (req, res, next) {
+    res.sendFile(__dirname + "/views/ARScale.html")
+});
+
+//Asset response
+app.get("aa-logo.png", function(req,res,next){
+    res.sendFile(__dirname + "/Webpage/aa-logo.png")
+});
 app.get("/3DAssets/bigbox.gltf", function(req, res, next){
     res.sendFile(__dirname + "/3DAssets/bigbox.gltf")
 });
 app.get("/3DAssets/bigbox.bin", function(req, res, next){
     res.sendFile(__dirname + "/3DAssets/bigbox.bin")
 });
-app.get('/testing', function (req, res, next) {
-    res.sendFile(__dirname + "/views/ARScale.html")
-  });
+
 
 
 //App listen initates the server and prints the port.
