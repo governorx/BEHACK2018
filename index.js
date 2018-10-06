@@ -4,8 +4,8 @@ var path = require ('path')
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var privateKey  = fs.readFileSync('sslcert/private.key', 'utf8');
-var certificate = fs.readFileSync('sslcert/mydomain.csr', 'utf8');
+var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/server.cert', 'utf8');
 
 var credentials = {key: privateKey, cert: certificate};
 var express = require('express');
