@@ -55,15 +55,27 @@
                 <a href="/airport">AIRPORT TRAVEL</a>
             </li>
             <li class="dropdown">
-              <a href="/">PROFILE</a>
+              <a href="#">PROFILE</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 <div class="hero">
-  <h1>Hello Tauren</h1>
-  <h2>Continue to explore upcoming your trip to SFO</h2>
+  <h1 id ="User"></h1>
+  <h2 id = "info"></h2>
+  <script>
+  window.onload = function(){
+    var user = getReservation("123456");
+    var name = user.firstName;
+    var destination = user.flights[0].destinationCity;
+    var departureTime = user.flights[0].estimatedDeparture;
+    var origin = user.flights[0].originCity;
+
+    document.getElementById('User').innerHTML = "Hello " + name;
+    document.getElementById('info').innerHTML = "Your flight to " + destination + " from " + origin + " departs at " + departureTime;
+  };
+  </script>
 <div class="form-group">
     <input type="button" value="Start Travel Plans" class="btn btn-primary" onclick="location.href='airport'">
 </div>
