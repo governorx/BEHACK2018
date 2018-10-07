@@ -10,12 +10,6 @@
 <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-database.js"></script>
 <head>
   <script type="text/javascript" src="AAData.js"></script>
-  <script>
-  function getJson(){
-    var x = document.getElementById("record");
-    getKillMe(x);
-  }
-</script>
   <title>Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,7 +64,7 @@
     <div class="hero">
         <h1>Please Enter your 6-digit Confirmation Code</h1>
       <div class="form-group">
-        <form onsubmit="return getJson()">
+        <form onsubmit="updateUser()">
           <input type="text" name="record" id="record" class="btn btn-primary">
           <input type="submit" value="Submit" class="btn btn-primary">
         </form>
@@ -78,3 +72,47 @@
   </div>
   </div>
 </body>
+<script>
+// Initialize Firebase
+var  uid;
+var config = {
+  apiKey: "AIzaSyAvEiGQkLjdSBQoLtP_1A4PhgCXz5DkI3I",
+  authDomain: "behackhu2018.firebaseapp.com",
+  databaseURL: "https://behackhu2018.firebaseio.com",
+  projectId: "behackhu2018",
+  storageBucket: "behackhu2018.appspot.com",
+  messagingSenderId: "512276655013"
+};
+firebase.initializeApp(config);
+var db = firebase.firestore();
+db.settings({
+  timestampsInSnapshots: true
+});
+var database = firebase.database();
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log(user.uid);
+    uid = user.uid;
+  }
+  console.log(uid);
+  console.log(
+    firebase.database().ref('/users' + uid).once('value').then(function(snapshot) {
+    var username = (snapshot.val() && snapshot.val().bags) || 3})
+  )
+});
+function writeUserData(uid) {
+  console.log("Look at you babe")
+
+    var x = document.getElementById("record");
+    var fakeuser = getKillMe(x);
+  db.collection("flightusers").doc(uid).set({
+    firstName: fakeuser.firstName,
+    lastName: fakeuser.lastName,
+    recordLocator: fakeuser.recordLocator
+  });
+}
+
+function updateUser() {
+  writeUserData(uid);
+}
+</script>
