@@ -1,0 +1,70 @@
+<!--This page will interface with firebase, and send the user to the arscale page in cases of ambiguity.-->
+<!-- Import and configure the Firebase SDK -->
+<!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+<!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-database.js"></script>
+<head>
+  <script type="text/javascript" src="AAData.js"></script>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/Header-Nightsky.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
+<body>
+  <div class="header-nightsky">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="/aa-logo.png" width="400">
+        </a>
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/home">HOME</a></li>
+            <li class="dropdown">
+                <a href="/luggage">LUGGAGE</a>
+            </li>
+            <li class="dropdown">
+                <a href="/airport">AIRPORT TRAVEL</a>
+            </li>
+            <li class="dropdown">
+              <a href="/">PROFILE</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<div class="hero">
+  <h1>Hello Tauren</h1>
+  <h2>Continue to explore upcoming your trip to SFO</h2>
+<div class="form-group">
+    <input type="button" value="Start Travel Plans" class="btn btn-primary" onclick="location.href='airport'">
+</div>
+</div>
