@@ -51,10 +51,10 @@
                 <a href="/luggage">LUGGAGE</a>
             </li>
             <li class="dropdown">
-                <a href="#">AIRPORT TRAVEL</a>
+                <a href="airport">AIRPORT TRAVEL</a>
             </li>
             <li class="dropdown">
-              <a href="#">PROFILE</a>
+              <a href="/">PROFILE</a>
             </li>
           </ul>
         </div>
@@ -63,7 +63,7 @@
     <br> </br>
     <br> </br>
     <br> </br>
-    <div class="collapse navbar-collapse align="middle">
+    <div class="collapse navbar-collapse" align="middle">
         <td valign="bottom"> <h1>How many bags will you check?</h1></td>
       <div class="form-group" style="width:260px;">
         <label for="exampleFormControlSelect1" align="right">$30 for your first bag, $40 for the rest </label>
@@ -96,7 +96,6 @@
   db.settings({
     timestampsInSnapshots: true
   });
-  var database = firebase.database();
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       console.log(user.uid);
