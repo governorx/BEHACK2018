@@ -4,7 +4,6 @@ var path = require ('path')
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var firestore = require("firebase/firestore");
 var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
 var certificate = fs.readFileSync('sslcert/server.cert', 'utf8');
 
@@ -26,10 +25,19 @@ app.get('/luggage', function(req,res,next){
 app.get('/testing', function (req, res, next) {
     res.sendFile(__dirname + "/views/ARScale.html")
 });
+app.get('/home', function (req, res, next) {
+      res.sendFile(__dirname + "/views/Webpage/webpage.html")
+});
 
 //Asset response
+app.get("/assets/css/Header-Nightsky.css", function(req,res,next){
+    res.sendFile(__dirname + "/views/Webpage/assets/css/Header-Nightsky.css")
+});
+app.get("/nightsky.jpg", function(req,res,next){
+    res.sendFile(__dirname + "/Assets/nightsky.jpg")
+});
 app.get("/aa-logo.png", function(req,res,next){
-    res.sendFile(__dirname + "/Assets/aa-logo.png")
+    res.sendFile(__dirname + "/Assets/american-airlines-renv.png")
 });
 app.get("/bigbox.gltf", function(req, res, next){
     res.sendFile(__dirname + "/Assets/bigbox.gltf")
@@ -44,4 +52,3 @@ app.get("/bigbox.bin", function(req, res, next){
 app.listen(3000, function(){
     console.log("Server running at port 3000.." )
   });
-  
