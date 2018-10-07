@@ -32,7 +32,7 @@ app.get('/user', function (req, res, next) {
       res.sendFile(__dirname + "/views/usertest.html")
 });
 app.get('/airport', function(req, res, next){
-        res.sendFile(__dirname + "/views/")
+        res.sendFile(__dirname + "/views/AirportTravel.html")
 });
 
 //Asset response
