@@ -13,8 +13,8 @@
   "id": "string"
 }
 */
-function getUserAA(userEmail){
-  var request = require("request");
+function getUserAA(userEmail) {
+  userEmail += ''
   var emailSplit = userEmail.split('@');
   var options = { method: 'GET',
     url: 'http://curl%20-X%20GET%20%22https:/behack2018hu.herokuapp.com/user',
@@ -23,11 +23,14 @@ function getUserAA(userEmail){
     { 'Postman-Token': 'acf9022d-8e97-480e-875a-725e9ce106be',
       'Cache-Control': 'no-cache' } };
 
-      request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-
-        console.log(body);
-      });
+      // request(options, function (error, response, body) {
+      //   if (error) throw new Error(error);
+      //
+      //   console.log(body);
+      // });
+      console.log("running");
+      console.log(userEmail);
+      console.log("done");
 }
 
 /*
@@ -84,12 +87,12 @@ function makeUserAA(fName, lName, emailAddress, gender){
   ]
 }
 */
-function getReservationAA(recordLocater){
+function getReservationAA(recordL){
   var request = require("request");
 
   var options = { method: 'GET',
     url: 'http://curl%20-X%20GET%20%22https:/behack2018hu.herokuapp.com/reservation',
-    qs: { recordLocator: recordLocater + '%22%20-H%20%22accept:%20application/json%22' },
+    qs: { recordLocator: recordL + '%22%20-H%20%22accept:%20application/json%22' },
     headers:
     { 'Postman-Token': 'b8181599-634c-4e8c-9d55-3b6fd965190c',
       'Cache-Control': 'no-cache' } };
@@ -99,4 +102,28 @@ function getReservationAA(recordLocater){
 
         console.log(body);
       });
+}
+
+
+function getKillMe(){
+  var endMe = {
+  "firstName": "Coleman",
+  "lastName": "Scott",
+  "recordLocator": "ABCDEF",
+  "flights": [
+    {
+      "flightNumber": "123",
+      "originCode": "987",
+      "originCity": "Pittsburgh",
+      "destinationCode": "153",
+      "destinationCity": "New York",
+      "estimatedDeparture": "2:00",
+      "scheduledDeparture": "2:00",
+      "estimatedArrival": "12:00",
+      "scheduledArrival": "3:00"
+    }
+  ]
+};
+  console.log("test")
+  console.log(endMe);
 }
