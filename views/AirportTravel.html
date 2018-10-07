@@ -71,8 +71,23 @@
 
 <div id="mapholder"></div>
 
+<div id="map" style="width:800px;height:400px"></div>
+
 <script>
 var x = document.getElementById("demo");
+var lati = document.getElementById("demo");
+var long = document.getElementById("demo");
+getLocation();
+
+  function myMap() {
+          var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 13,
+      center: {lat: lati, lng: long}
+    });
+
+    var trafficLayer = new google.maps.TrafficLayer();
+    trafficLayer.setMap(map);
+    }
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -84,8 +99,11 @@ function getLocation() {
 
 function showPosition(position) {
     var latlon = position.coords.latitude + "," + position.coords.longitude;
-    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
-    +latlon+"&zoom=14&size=400x300&key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4";
+    console.log("Latitude and Longitude: " + latlon);
+    lati = position.coords.latitude;
+    long = position.coords.longitude;
+    console.log("Latitude and Longitude 2: " + lati+","+long);
+    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4";
     document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
 }
 
@@ -105,22 +123,11 @@ function showError(error) {
             break;
     }
 }
+
 </script>
 
-<div id="map" style="width:400px;height:400px">
-
-    <script>
-        function myMap() {
-        var mapOptions = {
-            center: new google.maps.LatLng(51.5, -0.12),
-            zoom: 10,
-            mapTypeId: google.maps.MapTypeId.HYBRID
-        }
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    }
-  </script>
-
-  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4&callback=myMap"></script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4&callback=myMap"></script>
+  
 
 
     </div>
