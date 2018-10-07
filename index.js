@@ -22,7 +22,7 @@ app.get('/', function (req, res, next) {
 app.get('/luggage', function(req,res,next){
     res.sendFile(__dirname + "/views/LuggageManager.html")
 });
-app.get('/testing', function (req, res, next) {
+app.get('/measure', function (req, res, next) {
     res.sendFile(__dirname + "/views/ARScale.html")
 });
 app.get('/home', function (req, res, next) {
