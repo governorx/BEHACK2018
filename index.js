@@ -28,6 +28,9 @@ app.get('/measure', function (req, res, next) {
 app.get('/home', function (req, res, next) {
       res.sendFile(__dirname + "/views/Webpage/webpage.html")
 });
+app.get('/user', function (req, res, next) {
+      res.sendFile(__dirname + "/views/Webpage/usertest.html")
+});
 
 //Asset response
 app.get("/assets/css/Header-Nightsky.css", function(req,res,next){
@@ -45,7 +48,9 @@ app.get("/bigbox.gltf", function(req, res, next){
 app.get("/bigbox.bin", function(req, res, next){
     res.sendFile(__dirname + "/Assets/bigbox.bin")
 });
-
+app.get("/AAData.js", function(req, res, next){
+    res.sendFile(__dirname + "/AAData.js")
+});
 
 
 //App listen initates the server and prints the port.
