@@ -42,7 +42,7 @@ function getUserAA(userEmail) {
 */
 // This most likely is unneeded
 function makeUserAA(fName, lName, emailAddress, gender){
-  var request = require("request");
+  // var request = require("request");
   var emailSplit = userEmail.split('@');
 
   var options = { method: 'GET',
@@ -88,7 +88,7 @@ function makeUserAA(fName, lName, emailAddress, gender){
 }
 */
 function getReservationAA(recordL){
-  var request = require("request");
+  // var request = require("request");
 
   var options = { method: 'GET',
     url: 'http://curl%20-X%20GET%20%22https:/behack2018hu.herokuapp.com/reservation',
@@ -107,14 +107,14 @@ function getReservationAA(recordL){
 
 function getKillMe(){
   var endMe = {
-  "firstName": "Coleman",
-  "lastName": "Scott",
+  "firstName": "Tauren",
+  "lastName": "Bass",
   "recordLocator": "ABCDEF",
   "flights": [
     {
       "flightNumber": "123",
       "originCode": "987",
-      "originCity": "Pittsburgh",
+      "originCity": "San Francisco",
       "destinationCode": "153",
       "destinationCity": "New York",
       "estimatedDeparture": "2:00",
@@ -126,4 +126,22 @@ function getKillMe(){
 };
   console.log("test")
   console.log(endMe);
+  return endMe;
+}
+
+function createPostReservation(){
+  var options = { method: 'POST',
+    url: 'https://behack2018hu.herokuapp.com/reservation',
+    qs: { userId: 'coleman', flightIds: 'ab%0A' },
+    headers:
+     { 'Postman-Token': 'c8c91dd2-537d-4cf2-aafd-da6d7007c5b5',
+       'cache-control': 'no-cache',
+       'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
+    formData: { coleman: 'GJVRAZ' } };
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    console.log(body);
+  });
 }
