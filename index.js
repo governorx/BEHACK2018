@@ -34,7 +34,10 @@ app.get('/user', function (req, res, next) {
 app.get('/airport', function(req, res, next){
         res.sendFile(__dirname + "/views/AirportTravel.html")
 });
-
+app.get('/userInfo', function (req, res, next) {
+      res.sendFile(__dirname + "/views/userInfo.html")
+});
+  
 //Asset response
 app.get("/assets/css/Header-Nightsky.css", function(req,res,next){
     res.sendFile(__dirname + "/views/Webpage/assets/css/Header-Nightsky.css")

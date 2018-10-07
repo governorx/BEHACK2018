@@ -107,14 +107,14 @@ function getReservationAA(recordL){
 
 function getKillMe(){
   var endMe = {
-  "firstName": "Coleman",
-  "lastName": "Scott",
+  "firstName": "Tauren",
+  "lastName": "Bass",
   "recordLocator": "ABCDEF",
   "flights": [
     {
       "flightNumber": "123",
       "originCode": "987",
-      "originCity": "Pittsburgh",
+      "originCity": "San Francisco",
       "destinationCode": "153",
       "destinationCity": "New York",
       "estimatedDeparture": "2:00",
