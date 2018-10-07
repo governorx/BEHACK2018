@@ -87,7 +87,6 @@
 
 <script>
 var x = document.getElementById("demo");
-
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -95,14 +94,12 @@ function getLocation() {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
-
 function showPosition(position) {
     var latlon = position.coords.latitude + "," + position.coords.longitude;
     var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
     +latlon+"&zoom=14&size=400x300&key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4";
     document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
 }
-
 function showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
@@ -131,7 +128,6 @@ function showError(error) {
     infoWindow = new google.maps.InfoWindow;
     var trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map)
-
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -139,7 +135,6 @@ function showError(error) {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
@@ -152,7 +147,6 @@ function showError(error) {
           handleLocationError(false, infoWindow, map.getCenter());
         }
       }
-
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?

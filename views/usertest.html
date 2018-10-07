@@ -95,6 +95,7 @@ firebase.auth().onAuthStateChanged((user) => {
     uid = user.uid;
   }
   console.log(uid);
+  writeUserData(uid);
   console.log(
     firebase.database().ref('/users' + uid).once('value').then(function(snapshot) {
     var username = (snapshot.val() && snapshot.val().bags) || 3})
@@ -104,11 +105,16 @@ function writeUserData(uid) {
   console.log("Look at you babe")
 
     var x = document.getElementById("record");
-    var fakeuser = getKillMe(x);
+    var user = getReservation(x);
   db.collection("flightusers").doc(uid).set({
-    firstName: fakeuser.firstName,
-    lastName: fakeuser.lastName,
-    recordLocator: fakeuser.recordLocator
+    firstName: user.firstName,
+    lastName: user.lastName,
+    recordLocator: user.recordLocator,
+    origin: user.flights[0].originCity,
+    destination: user.flights[0].destinationCity,
+    departureTime: user.flights[0].estimatedDeparture,
+    arrivalTime: user.flights[0].estimatedArrival
+
   });
 }
 

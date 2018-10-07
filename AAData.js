@@ -105,11 +105,11 @@ function getReservationAA(recordL){
 }
 
 
-function getKillMe(){
+function getReservation(){
   var endMe = {
   "firstName": "Tauren",
   "lastName": "Bass",
-  "recordLocator": "ABCDEF",
+  "recordLocator": "123456",
   "flights": [
     {
       "flightNumber": "123",
@@ -119,8 +119,8 @@ function getKillMe(){
       "destinationCity": "New York",
       "estimatedDeparture": "2:00",
       "scheduledDeparture": "2:00",
-      "estimatedArrival": "12:00",
-      "scheduledArrival": "3:00"
+      "estimatedArrival": "7:00",
+      "scheduledArrival": "7:00"
     }
   ]
 };
