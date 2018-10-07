@@ -40,7 +40,7 @@ app.get("/assets/css/Header-Nightsky.css", function(req,res,next){
     res.sendFile(__dirname + "/views/Webpage/assets/css/Header-Nightsky.css")
 });
 app.get("/nightsky.jpg", function(req,res,next){
-    res.sendFile(__dirname + "/Assets/nightsky.jpg")
+    res.sendFile(__dirname + "/Assets/sky.jpg")
 });
 app.get("/aa-logo.png", function(req,res,next){
     res.sendFile(__dirname + "/Assets/american-airlines-renv.png")
