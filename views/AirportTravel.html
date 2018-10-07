@@ -60,11 +60,70 @@
         </div>
       </div>
     </nav>
-    <br> </br>
-    <br> </br>
-    <br> </br>
-    <div class="hero" align="middle">
-  </div>
+  <div class = "hero">
+    <h1>The sky is the limit</h1>
+    <p>Here is some text i wrote but i do not care about it at the moment</p>
+    <div class="btn btn-primary">Lets go fly together</div>
+    <div class="btn btn-primary">Contact us</div>
+
+
+<div id="getLocation()"></div>
+
+<div id="mapholder"></div>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    var latlon = position.coords.latitude + "," + position.coords.longitude;
+    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
+    +latlon+"&zoom=14&size=400x300&key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4";
+    document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+</script>
+
+<div id="map" style="width:400px;height:400px">
+
+    <script>
+        function myMap() {
+        var mapOptions = {
+            center: new google.maps.LatLng(51.5, -0.12),
+            zoom: 10,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    }
+  </script>
+
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4&callback=myMap"></script>
+
+
+    </div>
   </div>
 </body>
 <script>
