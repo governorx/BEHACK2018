@@ -37,7 +37,10 @@ app.get('/airport', function(req, res, next){
 app.get('/userInfo', function (req, res, next) {
       res.sendFile(__dirname + "/views/userInfo.html")
 });
-  
+app.get('/restaurant', function (req, res, next) {
+    res.sendFile(__dirname + "/views/RestaurantFinder.html")
+});
+
 //Asset response
 app.get("/assets/css/Header-Nightsky.css", function(req,res,next){
     res.sendFile(__dirname + "/views/Webpage/assets/css/Header-Nightsky.css")

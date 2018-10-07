@@ -1,323 +1,189 @@
-<!--This page will interface with firebase, and send the user to the arscale page in cases of ambiguity.-->
-<!-- Import and configure the Firebase SDK -->
-<!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
-<!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
-<!DOCTYPE html>
-<html lang="en">
-<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-database.js"></script>
 <head>
-  <title>Home</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/Header-Nightsky.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta charset="utf-8">
-  <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-    </style>
-</head>
-<body>
-  <div class="header-nightsky">
-    <nav class="navbar navbar-default">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="/aa-logo.png" width="400">
-        </a>
-        <br> </br>
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <title>Home</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/Header-Nightsky.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+              height: 100%;
+            }
+          </style>
+          <title>POI Click Events</title>
+          <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+          <meta charset="utf-8">
+          <style>
+            .title {
+              font-weight: bold;
+            }
+            #infowindow-content {
+              display: none;
+            }
+            #map #infowindow-content {
+              display: inline;
+            }
+          </style>
+      </head>
+      <body>
+        <div class="header-nightsky">
+          <nav class="navbar navbar-default">
+            <div class="container">
+              <a class="navbar-brand" href="#">
+                <img src="/aa-logo.png" width="400">
+              </a>
+              <br> </br>
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/home">HOME</a></li>
+                  <li class="dropdown">
+                      <a href="/luggage">LUGGAGE</a>
+                  </li>
+                  <li class="dropdown">
+                      <a href="#">AIRPORT TRAVEL</a>
+                  </li>
+                  <li class="dropdown">
+                    <a
+                    href="/"
+                    >Profile</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <div class = "hero">
+          <h2> Navigation </h2>
+                <div class="btn btn-primary" onclick=informUser()>Uber</div>
+          <div class="btn btn-primary">Directions</div>
+          <a href="https://www.google.com/maps/dir/37.6022895,-122.3708185/sfo/@37.6171368,-122.4049,14z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x808f778c55555555:0xa4f25c571acded3f!2m2!1d-122.3789554!2d37.6213129!3e0">
+            <div class="btn btn-primary">Public Transportation</div>
+          </a>
+          <a href="https://www.flysfo.com/maps"><div class="btn btn-primary">Airport Map</div></a>
+          <br>
+          <br>
+      <div id="getLocation()"></div>
+      
+      <div id="mapholder"></div>
+      
+      <script>
+      
+      </script>
+      
+      <body>
+        <div id="map"></div>
+        <div id="infowindow-content">
+          <img id="place-icon" src="" height="16" width="16">
+          <span id="place-name"  class="title"></span><br>
+          Place ID <span id="place-id"></span><br>
+          <span id="place-address"></span>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/home">HOME</a></li>
-            <li class="dropdown">
-                <a href="/luggage">LUGGAGE</a>
-            </li>
-            <li class="dropdown">
-                <a href="#">AIRPORT TRAVEL</a>
-            </li>
-            <li class="dropdown">
-              <a
-              href="/"
-              >Profile</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  <div class = "hero">
-    <h2> Navigation </h2>
-    <a href="https://m.uber.com/ul/?action=setPickup&client_id=-U4XJOt7PDo7wWpIMBcXRhDpG1i0id1E&pickup=my_location&dropoff[formatted_address]=San%20Francisco%20International%20Airport%20(SFO)%2C%20San%20Francisco%2C%20CA%2C%20USA&dropoff[latitude]=37.621313&dropoff[longitude]=-122.378955">
-      <div class="btn btn-primary">Uber</div>
-    </a>
-    <div class="btn btn-primary">Directions</div>
-    <div class="btn btn-primary">Public Transportation</div>
-    <a href=""><div class="btn btn-primary">Airport Map</div></a>
-    <br>
-    <br>
-<div id="getLocation()"></div>
+        <script>
 
-<div id="mapholder"></div>
-
-<script>
-var x = document.getElementById("demo");
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-function showPosition(position) {
-    var latlon = position.coords.latitude + "," + position.coords.longitude;
-    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
-    +latlon+"&zoom=14&size=400x300&key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4";
-    document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
-}
-function showError(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            x.innerHTML = "User denied the request for Geolocation."
-            break;
-        case error.POSITION_UNAVAILABLE:
-            x.innerHTML = "Location information is unavailable."
-            break;
-        case error.TIMEOUT:
-            x.innerHTML = "The request to get user location timed out."
-            break;
-        case error.UNKNOWN_ERROR:
-            x.innerHTML = "An unknown error occurred."
-            break;
-    }
-}
-</script>
-<div id="map" style="width:2000px;height:500px" align="middle">
-  <center>
-    <script>
-        function myMap() {
-          var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 13,
-      center: {lat: -34.397, lng: 150.644}
-    });
-    infoWindow = new google.maps.InfoWindow;
-    var trafficLayer = new google.maps.TrafficLayer();
-    trafficLayer.setMap(map)
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+          function initMap() {
+            var pos = document.getElementById("demo");
+            navigator.geolocation.getCurrentPosition(function(position) {
+            pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
-            };
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
-  </script>
-</center>
-  <script async defer
-    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4&callback=myMap">
-  </script>
-    </div>
-  </div>
-</body>
-<script>
-  // Initialize Firebase
-  var  uid;
-  var config = {
-    apiKey: "AIzaSyAvEiGQkLjdSBQoLtP_1A4PhgCXz5DkI3I",
-    authDomain: "behackhu2018.firebaseapp.com",
-    databaseURL: "https://behackhu2018.firebaseio.com",
-    projectId: "behackhu2018",
-    storageBucket: "behackhu2018.appspot.com",
-    messagingSenderId: "512276655013"
-  };
-  firebase.initializeApp(config);
-  var db = firebase.firestore();
-  db.settings({
-    timestampsInSnapshots: true
-  });
-  var database = firebase.database();
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      console.log(user.uid);
-      uid = user.uid;
-    }
-    console.log(uid);
-    console.log(
-      firebase.database().ref('/users' + uid).once('value').then(function(snapshot) {
-      var username = (snapshot.val() && snapshot.val().bags) || 3})
-    )
-  });
-  function writeUserData(uid, bags) {
-    console.log("Look at you babe")
-    db.collection("users").doc(uid).set({
-      bags: bags
-    });
-  }
-  function updateUser(){
-      var val = document.getElementById("numLug").value;
-      writeUserData(uid,  val);
-    }
-  db.collection("users").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data().bags}`);
-      });
-  });
-</script>
-
-<head>
-    <title>POI Click Events</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .title {
-        font-weight: bold;
-      }
-      #infowindow-content {
-        display: none;
-      }
-      #map #infowindow-content {
-        display: inline;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <div id="infowindow-content">
-      <img id="place-icon" src="" height="16" width="16">
-      <span id="place-name"  class="title"></span><br>
-      Place ID <span id="place-id"></span><br>
-      <span id="place-address"></span>
-    </div>
-    <script>
-      function initMap() {
-        var origin = {lat: -33.871, lng: 151.197};
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 18,
-          center: origin
-        });
-        var clickHandler = new ClickEventHandler(map, origin);
-      }
-
-      /**
-       * @constructor
-       */
-      var ClickEventHandler = function(map, origin) {
-        this.origin = origin;
-        this.map = map;
-        this.directionsService = new google.maps.DirectionsService;
-        this.directionsDisplay = new google.maps.DirectionsRenderer;
-        this.directionsDisplay.setMap(map);
-        this.placesService = new google.maps.places.PlacesService(map);
-        this.infowindow = new google.maps.InfoWindow;
-        this.infowindowContent = document.getElementById('infowindow-content');
-        this.infowindow.setContent(this.infowindowContent);
-
-        // Listen for clicks on the map.
-        this.map.addListener('click', this.handleClick.bind(this));
-      };
-
-      ClickEventHandler.prototype.handleClick = function(event) {
-        console.log('You clicked on: ' + event.latLng);
-        // If the event has a placeId, use it.
-        if (event.placeId) {
-          console.log('You clicked on place:' + event.placeId);
-
-          // Calling e.stop() on the event prevents the default info window from
-          // showing.
-          // If you call stop here when there is no placeId you will prevent some
-          // other map click event handlers from receiving the event.
-          event.stop();
-          this.calculateAndDisplayRoute(event.placeId);
-          this.getPlaceInformation(event.placeId);
-        }
-      };
-
-      ClickEventHandler.prototype.calculateAndDisplayRoute = function(placeId) {
-        var me = this;
-        this.directionsService.route({
-          origin: this.origin,
-          destination: {placeId: placeId},
-          travelMode: 'WALKING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            me.directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
+            }
+            });
+            
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: pos
+            });
+            var clickHandler = new ClickEventHandler(map, pos);
           }
-        });
-      };
-
-      ClickEventHandler.prototype.getPlaceInformation = function(placeId) {
-        var me = this;
-        this.placesService.getDetails({placeId: placeId}, function(place, status) {
-          if (status === 'OK') {
-            me.infowindow.close();
-            me.infowindow.setPosition(place.geometry.location);
-            me.infowindowContent.children['place-icon'].src = place.icon;
-            me.infowindowContent.children['place-name'].textContent = place.name;
-            me.infowindowContent.children['place-id'].textContent = place.place_id;
-            me.infowindowContent.children['place-address'].textContent =
-                place.formatted_address;
-            me.infowindow.open(me.map);
-          }
-        });
-      };
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4&libraries=places&callback=initMap"
-        async defer></script>
-  </body>
+    
+          /**
+           * @constructor
+           */
+          var ClickEventHandler = function(map, origin) {
+            this.origin = origin;
+            this.map = map;
+            this.directionsService = new google.maps.DirectionsService;
+            this.directionsDisplay = new google.maps.DirectionsRenderer;
+            this.directionsDisplay.setMap(map);
+            this.placesService = new google.maps.places.PlacesService(map);
+            this.infowindow = new google.maps.InfoWindow;
+            this.infowindowContent = document.getElementById('infowindow-content');
+            this.infowindow.setContent(this.infowindowContent);
+    
+            // Listen for clicks on the map.
+            this.map.addListener('click', this.handleClick.bind(this));
+          };
+    
+          ClickEventHandler.prototype.handleClick = function(event) {
+            console.log('You clicked on: ' + event.latLng);
+            // If the event has a placeId, use it.
+            if (event.placeId) {
+              console.log('You clicked on place:' + event.placeId);
+    
+              // Calling e.stop() on the event prevents the default info window from
+              // showing.
+              // If you call stop here when there is no placeId you will prevent some
+              // other map click event handlers from receiving the event.
+              event.stop();
+              this.calculateAndDisplayRoute(event.placeId);
+              this.getPlaceInformation(event.placeId);
+            }
+          };
+    
+          ClickEventHandler.prototype.calculateAndDisplayRoute = function(placeId) {
+            var me = this;
+            this.directionsService.route({
+              origin: this.origin,
+              destination: {placeId: placeId},
+              travelMode: 'WALKING'
+            }, function(response, status) {
+              if (status === 'OK') {
+                me.directionsDisplay.setDirections(response);
+              } else {
+                window.alert('Directions request failed due to ' + status);
+              }
+            });
+          };
+    
+          ClickEventHandler.prototype.getPlaceInformation = function(placeId) {
+            var me = this;
+            this.placesService.getDetails({placeId: placeId}, function(place, status) {
+              if (status === 'OK') {
+                me.infowindow.close();
+                me.infowindow.setPosition(place.geometry.location);
+                me.infowindowContent.children['place-icon'].src = place.icon;
+                me.infowindowContent.children['place-name'].textContent = place.name;
+                me.infowindowContent.children['place-id'].textContent = place.place_id;
+                me.infowindowContent.children['place-address'].textContent =
+                    place.formatted_address;
+                me.infowindow.open(me.map);
+              }
+            });
+          };
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC__enugyQRkIPBh2lSYg_sPcr5v3kkss4&libraries=places&callback=initMap"
+            async defer></script>
+      </body>
