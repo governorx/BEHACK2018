@@ -4,6 +4,7 @@ var path = require ('path')
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+var firestore = require("firebase/firestore");
 var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
 var certificate = fs.readFileSync('sslcert/server.cert', 'utf8');
 
@@ -19,19 +20,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', function (req, res, next) {
     res.sendFile(__dirname + "/views/index.html")
   });
+app.get('/luggage', function(req,res,next){
+    res.sendFile(__dirname + "/views/LuggageManager.html")
+});
 app.get('/testing', function (req, res, next) {
     res.sendFile(__dirname + "/views/ARScale.html")
 });
 
 //Asset response
-app.get("aa-logo.png", function(req,res,next){
-    res.sendFile(__dirname + "/Webpage/aa-logo.png")
+app.get("/aa-logo.png", function(req,res,next){
+    res.sendFile(__dirname + "/Assets/aa-logo.png")
 });
-app.get("/3DAssets/bigbox.gltf", function(req, res, next){
-    res.sendFile(__dirname + "/3DAssets/bigbox.gltf")
+app.get("/bigbox.gltf", function(req, res, next){
+    res.sendFile(__dirname + "/Assets/bigbox.gltf")
 });
-app.get("/3DAssets/bigbox.bin", function(req, res, next){
-    res.sendFile(__dirname + "/3DAssets/bigbox.bin")
+app.get("/bigbox.bin", function(req, res, next){
+    res.sendFile(__dirname + "/Assets/bigbox.bin")
 });
 
 
