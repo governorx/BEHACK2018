@@ -29,7 +29,7 @@ app.get('/home', function (req, res, next) {
       res.sendFile(__dirname + "/views/Webpage/webpage.html")
 });
 app.get('/user', function (req, res, next) {
-      res.sendFile(__dirname + "/views/Webpage/usertest.html")
+      res.sendFile(__dirname + "/views/usertest.html")
 });
 
 //Asset response
